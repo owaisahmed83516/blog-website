@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiX, FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Yahan aap apna authentication check laga sakte hain
+    navigate('/admin');
+    onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -49,7 +58,7 @@ const Login = ({ isOpen, onClose }) => {
         </div>
 
         {/* Form Inputs */}
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <div className="border border-zinc-200 rounded-xl px-4 py-2.5 focus-within:border-[#0D7AD8] transition-colors">
             <label className="block text-[11px] font-medium text-zinc-400">Email Address</label>
             <input 
